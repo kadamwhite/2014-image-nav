@@ -1,7 +1,16 @@
+/* global: TwentyFourteen:false; */
+window.TwentyFourteen = window.TwentyFourteen || {};
+
 /**
  * Twenty Fourteen keyboard support for image navigation.
  */
-( function( $ ) {
+(function( $ ) {
+	// Wrapper for URL redirection, for use in tests
+	TwentyFourteen.navigate = function( url ) {
+		window.location = url;
+	};
+
+	// Bind event handlers for keyboard image navigation
 	$( document ).on( 'keydown.twentyfourteen', function( e ) {
 		var url = false;
 
@@ -15,7 +24,7 @@
 		}
 
 		if ( url && ( !$( 'textarea, input' ).is( ':focus' ) ) ) {
-			window.location = url;
+			TwentyFourteen.navigate( url );
 		}
 	} );
-} )( jQuery );
+})( jQuery );
