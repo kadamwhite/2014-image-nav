@@ -8,3 +8,6 @@ Image navigation enhancements for the [Twenty Fourteen](http://twentyfourteendem
 * License: GPLv3 or later
 * License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
+## Running the tests
+
+The tests for this library are written in [QUnit](http://qunitjs.com), which we install using [Bower](http://bower.io/). From the root of the repository in a terminal window, run `bower install` to download and install jQuery and QUnit. Then open [tests/qunit-tests.html](tests/qunit-tests.html) to run the tests.
