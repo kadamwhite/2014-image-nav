@@ -5,6 +5,10 @@ window.TwentyFourteen = window.TwentyFourteen || {};
  * Twenty Fourteen keyboard support for image navigation.
  */
 (function( $ ) {
+	var loadPage = function( url ) {
+		TwentyFourteen.navigate( url + '#main' );
+	};
+
 	// Wrapper for URL redirection, for use in tests
 	TwentyFourteen.navigate = function( url ) {
 		window.location = url;
@@ -16,15 +20,11 @@ window.TwentyFourteen = window.TwentyFourteen || {};
 
 		// Left arrow key code.
 		if ( e.which === 37 ) {
-			url = $( '.previous-image a' ).attr( 'href' );
+			loadPage( $( '.previous-image a' ).attr( 'href' ) );
 
 		// Right arrow key code.
 		} else if ( e.which === 39 ) {
-			url = $( '.entry-attachment a' ).attr( 'href' );
-		}
-
-		if ( url && ( !$( 'textarea, input' ).is( ':focus' ) ) ) {
-			TwentyFourteen.navigate( url + '#main' );
+			loadPage( $( '.entry-attachment a' ).attr( 'href' ) );
 		}
 	} );
 })( jQuery );
