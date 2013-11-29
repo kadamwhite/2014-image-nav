@@ -32,7 +32,7 @@
 		$document.trigger( mockEvent );
 
 		// Expect location to have been called with the URL from the fixture
-		ok( TwentyFourteen.navigate.calledWith( 'prev-image-link.html' ),
+		ok( TwentyFourteen.navigate.calledWith( 'prev-image-link.html#main' ),
 			'Navigation called with the URL for the previous page' );
 	});
 
@@ -44,7 +44,7 @@
 		$document.trigger( mockEvent );
 
 		// Expect location to have been called with the URL from the fixture
-		ok( TwentyFourteen.navigate.calledWith( 'next-image-link.html' ),
+		ok( TwentyFourteen.navigate.calledWith( 'next-image-link.html#main' ),
 			'Navigation called with the URL for the next page' );
 	});
 
