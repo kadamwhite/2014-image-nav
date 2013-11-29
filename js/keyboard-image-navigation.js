@@ -6,7 +6,9 @@ window.TwentyFourteen = window.TwentyFourteen || {};
  */
 (function( $ ) {
 	var loadPage = function( url ) {
-		TwentyFourteen.navigate( url + '#main' );
+		if ( url && ( !$( 'textarea, input' ).is( ':focus' ) ) ) {
+			TwentyFourteen.navigate( url + '#main' );
+		}
 	};
 
 	// Wrapper for URL redirection, for use in tests
