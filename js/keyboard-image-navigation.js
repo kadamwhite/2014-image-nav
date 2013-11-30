@@ -25,6 +25,13 @@ window.TwentyFourteen = window.TwentyFourteen || {};
 		}
 	};
 
+	var updateURL = function( url ) {
+		if ( url && window.history ) {
+			// history API is available
+			window.history.replaceState( {}, '', url );
+		}
+	}
+
 	// Fetch the requested content and inject it into the current page
 	TwentyFourteen.navigate = function( url ) {
 		// Replace #primary #content with the requested page
@@ -34,8 +41,9 @@ window.TwentyFourteen = window.TwentyFourteen || {};
 				return;
 			}
 
-			// When request succeeds, update the title
+			// When request succeeds, update the title & URL
 			updateTitle( responseText );
+			updateURL( url );
 		});
 	};
 
