@@ -32,7 +32,7 @@
 		$document.trigger( mockEvent );
 
 		// Expect location to have been called with the URL from the fixture
-		ok( TwentyFourteen.navigate.calledWith( 'prev-image-link.html#main' ),
+		ok( TwentyFourteen.navigate.calledWith( 'prev-image-link.html' ),
 			'Navigation called with the URL for the previous page' );
 	});
 
@@ -44,7 +44,7 @@
 		$document.trigger( mockEvent );
 
 		// Expect location to have been called with the URL from the fixture
-		ok( TwentyFourteen.navigate.calledWith( 'next-image-link.html#main' ),
+		ok( TwentyFourteen.navigate.calledWith( 'next-image-link.html' ),
 			'Navigation called with the URL for the next page' );
 	});
 
@@ -64,6 +64,35 @@
 
 		// Restore jQuery.fn.is
 		$.fn.is.restore();
+	});
+
+	module( 'Async content loading', {
+		setup: function() {
+			// Mock out a server backend to test the async content loading
+			this.xhr = sinon.useFakeXMLHttpRequest();
+			var requests = this.requests = [];
+
+			// Every time a fake XMLHttpRequest is created, add it to requests
+			this.xhr.onCreate = function( xhr ) {
+				requests.push( xhr );
+			};
+		}
+	});
+
+	test( 'Requested content is loaded into the #content container', function() {
+		// Double-check that #content starts out empty
+		strictEqual( $( '#content' ).html(), '',
+			'Container is empty at start of test' );
+
+		// Trigger an ajax request and respond with dummy content
+		TwentyFourteen.navigate( 'some/url/' );
+		this.requests[0].respond( 200, {
+			'Content-Type': 'text/html'
+		}, '<div id="content"><h2>Subtitle</h2><img src="image.jpg" /></div>' );
+
+		// Expect the server response to have been loaded into the content container
+		strictEqual( $( '#content' ).html(), '<h2>Subtitle</h2><img src="image.jpg">',
+			'Contents of retrieved page are injected into #content' );
 	});
 
 })( jQuery );

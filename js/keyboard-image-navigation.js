@@ -5,9 +5,17 @@ window.TwentyFourteen = window.TwentyFourteen || {};
  * Twenty Fourteen keyboard support for image navigation.
  */
 (function( $ ) {
-	// Wrapper for URL redirection, for use in tests
+	var loadPage = function( url ) {
+		// Don't navigate if the user is editing an input field
+		if ( url && ( !$( 'textarea, input' ).is( ':focus' ) ) ) {
+			TwentyFourteen.navigate( url );
+		}
+	};
+
+	// Fetch the requested content and inject it into the current page
 	TwentyFourteen.navigate = function( url ) {
-		window.location = url;
+		// Replace #primary #content with the requested page
+		$( '#content' ).load( url + ' #content > *' );
 	};
 
 	// Bind event handlers for keyboard image navigation
@@ -16,15 +24,11 @@ window.TwentyFourteen = window.TwentyFourteen || {};
 
 		// Left arrow key code.
 		if ( e.which === 37 ) {
-			url = $( '.previous-image a' ).attr( 'href' );
+			loadPage( $( '.previous-image a' ).attr( 'href' ) );
 
 		// Right arrow key code.
 		} else if ( e.which === 39 ) {
-			url = $( '.entry-attachment a' ).attr( 'href' );
-		}
-
-		if ( url && ( !$( 'textarea, input' ).is( ':focus' ) ) ) {
-			TwentyFourteen.navigate( url + '#main' );
+			loadPage( $( '.entry-attachment a' ).attr( 'href' ) );
 		}
 	} );
 })( jQuery );
