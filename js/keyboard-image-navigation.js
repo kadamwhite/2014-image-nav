@@ -12,10 +12,31 @@ window.TwentyFourteen = window.TwentyFourteen || {};
 		}
 	};
 
+	var updateTitle = function( responseText ) {
+		// Parse the response as raw text to find a title tag
+		var titleRegEx = /<title>([^<]*)<\/title>/i,
+			titleMatch = responseText.match( titleRegEx ),
+			// If regex hits a match, titleMatch will not be null
+			title = titleMatch !== null ? titleMatch[1] : false;
+
+		// If we find a match, update the document's title attribute
+		if ( title ) {
+			document.title = title;
+		}
+	};
+
 	// Fetch the requested content and inject it into the current page
 	TwentyFourteen.navigate = function( url ) {
 		// Replace #primary #content with the requested page
-		$( '#content' ).load( url + ' #content > *' );
+		$( '#content' ).load( url + ' #content > *', function( responseText, status ) {
+			// Don't bother continuing if request didn't succeed
+			if ( 'success' !== status ) {
+				return;
+			}
+
+			// When request succeeds, update the title
+			updateTitle( responseText );
+		});
 	};
 
 	// Bind event handlers for keyboard image navigation
