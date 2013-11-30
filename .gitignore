@@ -1,3 +1,6 @@
 *.orig
 node_modules/
 bower_components/
+
+# Ignore the compiled test file
+qunit-compiled.html
