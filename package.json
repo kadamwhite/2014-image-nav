@@ -1,0 +1,28 @@
+{
+  "name": "twentyfourteen-enhanced-image-nav",
+  "version": "0.1.0",
+  "description": "Enhanced image navigation for the Twenty Fourteen default WordPress theme",
+  "homepage": "http://github.com/kadamwhite/twentyfourteen-enhanced-image-nav/",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/kadamwhite/twentyfourteen-enhanced-image-nav.git"
+  },
+  "bugs": {
+    "url": "https://github.com/kadamwhite/twentyfourteen-enhanced-image-nav/issues"
+  },
+  "author": "",
+  "license": "GPLv3",
+  "engines": {
+    "node": ">= 0.8.0"
+  },
+  "private": "true",
+  "scripts": {
+    "install": "bower install"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.2",
+    "grunt-contrib-jshint": "~0.7.2",
+    "grunt-contrib-qunit": "~0.3.0",
+    "grunt-contrib-watch": "~0.5.3"
+  }
+}

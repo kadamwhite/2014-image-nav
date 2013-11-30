@@ -1,3 +1,4 @@
+/* global TwentyFourteen:false */
 (function( $ ) {
 	'use strict';
 
