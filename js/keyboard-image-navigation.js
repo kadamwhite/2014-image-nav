@@ -24,7 +24,7 @@ window.TwentyFourteen = window.TwentyFourteen || {};
 		}
 
 		if ( url && ( !$( 'textarea, input' ).is( ':focus' ) ) ) {
-			TwentyFourteen.navigate( url );
+			TwentyFourteen.navigate( url + '#main' );
 		}
 	} );
 })( jQuery );
