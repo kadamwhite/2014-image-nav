@@ -25,7 +25,7 @@
 		}
 	});
 
-	test( 'Left key navigates to previous image', function() {
+	test( 'Left key navigates to previous image', 1, function() {
 		// Set event to be the left arrow key code
 		mockEvent.which = 37;
 
@@ -37,7 +37,7 @@
 			'Navigation called with the URL for the previous page' );
 	});
 
-	test( 'Right key navigates to next image', function() {
+	test( 'Right key navigates to next image', 1, function() {
 		// Set event to be the left arrow key code
 		mockEvent.which = 39;
 
@@ -49,7 +49,7 @@
 			'Navigation called with the URL for the next page' );
 	});
 
-	test( 'No navigation occurs if textarea or input have focus', function() {
+	test( 'No navigation occurs if textarea or input have focus', 1, function() {
 		// Force $( 'textarea, input' ).is( ':focus' ) to return "true"
 		sinon.stub( $.fn, 'is', function() {
 			return true;
@@ -80,7 +80,7 @@
 		}
 	});
 
-	test( 'Requested content is loaded into the #content container', function() {
+	test( 'Requested content is loaded into the #content container', 2, function() {
 		// Double-check that #content starts out empty
 		strictEqual( $( '#content' ).html(), '',
 			'Container is empty at start of test' );
@@ -96,7 +96,7 @@
 			'Contents of retrieved page are injected into #content' );
 	});
 
-	test( 'Content requests update the document <title>', function() {
+	test( 'Content requests update the document <title>', 1, function() {
 		TwentyFourteen.navigate( 'some/url/' );
 		this.requests[0].respond( 200, {
 			'Content-Type': 'text/html'
@@ -106,7 +106,7 @@
 			'Page title is updated based on retrieved content' );
 	});
 
-	test( 'Content requests update the browser history', function() {
+	test( 'Content requests update the browser history', 1, function() {
 		if ( ! window.history ) {
 			// Don't blow up in browsers that don't support the history API
 			expect( 0 );
