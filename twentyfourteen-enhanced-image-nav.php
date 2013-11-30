@@ -12,9 +12,11 @@
 
 // Register a new script for image navigation
 function custom_keyboard_image_navigation() {
+	// Enqueue the minified script if SCRIPT_DEBUG is set to "true"
+	$extension = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '.js' : '.min.js';
 	wp_register_script(
 		'twentyfourteen-keyboard-image-navigation',
-		plugin_dir_url( __FILE__ ) . 'js/keyboard-image-navigation.js',
+		plugin_dir_url( __FILE__ ) . 'js/keyboard-image-navigation' . $extension,
 		array( 'jquery' ),
 		'20130402'
 	);
