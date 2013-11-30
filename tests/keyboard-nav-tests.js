@@ -105,4 +105,26 @@
 			'Page title is updated based on retrieved content' );
 	});
 
+	test( 'Content requests update the browser history', function() {
+		if ( ! window.history ) {
+			// Don't blow up in browsers that don't support the history API
+			expect( 0 );
+			return;
+		}
+
+		// We put this assertion inside the stub so that we'll have direct
+		// access to the URL argument that gets passed in.
+		sinon.stub( window.history, 'replaceState', function( stateObj, title, url ) {
+			strictEqual( url, '/some/url/' );
+		});
+
+		TwentyFourteen.navigate( '/some/url/' );
+
+		this.requests[0].respond( 200, {
+			'Content-Type': 'text/html'
+		}, '<div/>' );
+
+		window.history.replaceState.restore();
+	});
+
 })( jQuery );
