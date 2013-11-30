@@ -95,4 +95,14 @@
 			'Contents of retrieved page are injected into #content' );
 	});
 
+	test( 'Content requests update the document <title>', function() {
+		TwentyFourteen.navigate( 'some/url/' );
+		this.requests[0].respond( 200, {
+			'Content-Type': 'text/html'
+		}, '<title>New Title</title>' );
+
+		strictEqual( document.title, 'New Title',
+			'Page title is updated based on retrieved content' );
+	});
+
 })( jQuery );
