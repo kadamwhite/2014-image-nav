@@ -6,14 +6,16 @@ window.TwentyFourteen = window.TwentyFourteen || {};
  */
 (function( $ ) {
 	var loadPage = function( url ) {
+		// Don't navigate if the user is editing an input field
 		if ( url && ( !$( 'textarea, input' ).is( ':focus' ) ) ) {
-			TwentyFourteen.navigate( url + '#main' );
+			TwentyFourteen.navigate( url );
 		}
 	};
 
-	// Wrapper for URL redirection, for use in tests
+	// Fetch the requested content and inject it into the current page
 	TwentyFourteen.navigate = function( url ) {
-		window.location = url;
+		// Replace #primary #content with the requested page
+		$( '#content' ).load( url + ' #content > *' );
 	};
 
 	// Bind event handlers for keyboard image navigation
