@@ -88,10 +88,10 @@
 		TwentyFourteen.navigate( 'some/url/' );
 		this.requests[0].respond( 200, {
 			'Content-Type': 'text/html'
-		}, '<div id="content"><h2>Subtitle</h2><img src="image.jpg" /></div>' );
+		}, '<div id="content"><h2>Subtitle</h2><img src="http://wp.com/image.jpg"></div>' );
 
 		// Expect the server response to have been loaded into the content container
-		strictEqual( $( '#content' ).html(), '<h2>Subtitle</h2><img src="image.jpg">',
+		strictEqual( $( '#content' ).html().toLowerCase(), '<h2>subtitle</h2><img src="http://wp.com/image.jpg">',
 			'Contents of retrieved page are injected into #content' );
 	});
 
